@@ -1,22 +1,30 @@
 const express = require('express');
-const connectDB = require('./config/db');
 const path = require('path');
+const connectDB = require('./config/db');
 
 // Init app
 const app = express();
 
-// Connect DB
+// Connect to database
 connectDB();
 
-// For fcc test
-const cors = require('cors');
-app.use(cors);
-
-// Acepting JSON data into our API
+// Acepting json data into our API
 app.use(express.json({ extended: false }));
+
+// To extract data to req.body
+app.use(express.urlencoded({ extended: false }));
+
+// enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+// so that your API is remotely testable by FCC
+const cors = require('cors');
+app.use(cors({ optionSuccessStatus: 200 })); // some legacy browsers choke on 204
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Define routes
+app.use('/api/exercise/', require('./routes/api/user'));
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  return console.log(`Servicio iniciado en puerto ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Servicio iniciado en puerto ${PORT}`));
