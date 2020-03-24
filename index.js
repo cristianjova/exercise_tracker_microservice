@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Define routes
 app.use('/api/exercise/', require('./routes/api/user'));
+app.use('/api/exercise/', require('./routes/api/exercise'));
 
 const PORT = process.env.PORT || 5000;
 

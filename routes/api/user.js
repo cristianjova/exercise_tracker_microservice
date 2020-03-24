@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const shortid = require('shortid');
 const { check, validationResult } = require('express-validator');
 
 // Import model
@@ -21,20 +22,22 @@ router.post(
     }
 
     const { username } = req.body;
+    const shortId = shortid.generate();
 
     try {
-      let user = await User.findOne({ username }).select('-__v');
+      let user = await User.findOne({ username });
 
       if (user) {
-        res.json(user);
+        res.json({ username: user.username, _id: user.shortId });
       } else {
         user = new User({
-          username
+          username,
+          shortId
         });
 
         await user.save();
 
-        res.json(user.populate('username', '_id'));
+        res.json({ username: user.username, _id: user.shortId });
       }
     } catch (err) {
       console.log(err);
@@ -46,9 +49,18 @@ router.post(
 // @route GET /api/exercise/users
 // Desc   Get all users
 router.get('/users', async (req, res) => {
-  const users = await User.find().select('-__v');
-  console.log(users);
-  res.json(users);
+  let users = await User.find(
+    {},
+    {
+      _id: 0,
+      __v: 0
+    }
+  );
+  let usersClean = [];
+  users.map(user => {
+    usersClean.push({ username: user.username, _id: user.shortId });
+  });
+  res.json(usersClean);
 });
 
 module.exports = router;

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const exerciseSchema = new mongoose.Schema({
   userId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
