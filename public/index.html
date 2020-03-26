@@ -3,9 +3,128 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Exercise Tracker</title>
   </head>
   <body>
-    <h1>Hola</h1>
+    <div class="container">
+      <header>
+        <h1 class="text-center x-large">Exercise Tracker API</h1>
+        <p class="lead">
+          Este proyecto forma parte del curriculum para la certificación de APIs
+          and Microservices de FreeCodeCamp
+        </p>
+        <p>Ver <a href="#">código fuente</a></p>
+      </header>
+      <div class="divide my-1"><hr /></div>
+      <h1 class="text-center large">Modo de uso</h1>
+      <section class="input">
+        <div class="card bg-light my-1">
+          <h2 class="text-primary">Crear Usuario</h2>
+          <p class="lead">Devuelve el _id y nombre de usuario</p>
+          <form class="my-1" action="/api/exercise/new-user" method="POST">
+            <div class="form-group">
+              <input
+                type="text"
+                name="username"
+                placeholder="Nombre de usuario*"
+                required
+              />
+            </div>
+            <input type="submit" value="Crear" class="btn-primary btn" />
+          </form>
+        </div>
+
+        <div class="card bg-light my-1">
+          <h2 class="text-primary">Agregar Ejercicio</h2>
+          <form class="my-1" action="/api/exercise/add" method="POST">
+            <div class="disposition">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="userId"
+                  placeholder="Id de usuario*"
+                  required
+                />
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Descripción*"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="duration"
+                  placeholder="Duración(minutos)*"
+                />
+                <input type="text" name="date" placeholder="Fecha" />
+              </div>
+              <p class="secondary-text">
+                (AAAA-MM-DD) Si desea fecha actual, no completar
+              </p>
+            </div>
+            <input type="submit" value="Agregar" class="btn btn-primary my-1" />
+          </form>
+        </div>
+      </section>
+
+      <section class="info">
+        <h2 class="my-1 large">Lista de usuarios</h2>
+        <pre class="bg-dark"><code>[project_url]/api/exercise/users</code></pre>
+        <p class="secondary-text">Devuelve todos los usuarios registrados</p>
+        <h2 class="my-1 large">Obtener los datos de ejercicio de un usuario</h2>
+        <pre
+          class="bg-dark"
+        ><code>[project_url]/api/exercise/log/userId:</code></pre>
+        <p class="secondary-text">
+          Devuelve todos los ejercicios de un usuario especifico
+        </p>
+        <pre
+          class="bg-dark"
+        ><code>[project_url]/api/exercise/log/userId:?limit=2</code></pre>
+        <p class="secondary-text">
+          Devuelve la cantidad especificada por el parametro limit
+        </p>
+        <pre
+          class="bg-dark"
+        ><code>[project_url]/api/exercise/log/userId:?from=2020-03-16&to=2020-03-25</code></pre>
+        <p class="secondary-text">
+          Devuelve los ejercicios comprendidos entre from y to
+        </p>
+        <pre
+          class="bg-dark"
+        ><code>[project_url]/api/exercise/log/userId:?from=2020-03-16&to=2020-03-25&limit=2</code></pre>
+        <p class="secondary-text">
+          Devuelve los ejercicios comprendidos entre from y to y limitada por el
+          parametro limit
+        </p>
+      </section>
+    </div>
+    <footer class="bg-light">
+      <div class="container py-1">
+        <div class="social">
+          <a href="https://github.com/cristianjova" target="_blank"
+            ><img src="/img/logo.png" alt="GitHub"
+          /></a>
+          <a href="https://www.twitter.com/cristian_jova13/" target="_blank"
+            ><img src="/img/twitter.png" alt="Twitter"
+          /></a>
+          <a
+            href="https://www.linkedin.com/in/cristian-jovanovich/"
+            target="_blank"
+            ><img src="/img/linkedin.png" alt="Linkedin"
+          /></a>
+        </div>
+      </div>
+      <p class="lead bg-primary py-1">
+        <strong>Creado por Cristian Jovanovich</strong>
+      </p>
+    </footer>
   </body>
 </html>

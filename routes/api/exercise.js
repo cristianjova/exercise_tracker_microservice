@@ -30,10 +30,15 @@ router.post(
     }
 
     const { userId, description, duration, date } = req.body;
+    console.log(date === '');
 
     // Validate date
     const validDate = new Date(date);
-    if (date !== undefined && validDate.toString() === 'Invalid Date') {
+    if (
+      date !== undefined &&
+      date !== '' &&
+      validDate.toString() === 'Invalid Date'
+    ) {
       return res.json({ error: 'Invalid Date, use YYYY-MM-DD' });
     }
 
@@ -48,7 +53,7 @@ router.post(
           userId: user._id,
           description,
           duration,
-          date: date === undefined ? datenow : date
+          date: date === undefined ? datenow : date === '' ? datenow : date
         });
 
         await exercise.save();

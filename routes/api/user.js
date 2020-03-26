@@ -9,7 +9,7 @@ const User = require('../../models/User');
 // @route POST /api/exercise/new-user
 // Desc   Create new user
 router.post(
-  '/create-user',
+  '/new-user',
   [
     check('username', 'Please include a username')
       .not()

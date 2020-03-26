@@ -23,6 +23,7 @@ app.use(cors({ optionSuccessStatus: 200 })); // some legacy browsers choke on 20
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Define routes
+app.use('/', require('./routes/api/index.js'));
 app.use('/api/exercise/', require('./routes/api/user'));
 app.use('/api/exercise/', require('./routes/api/exercise'));
 
